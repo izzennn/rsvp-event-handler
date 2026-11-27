@@ -58,3 +58,11 @@ td button, td .button { margin-top: 0; }
 }
 .msg-success { background: #e6f4ea; border-color: #2e7d32; color: #1b5e20; }
 .msg-error   { background: #fdecea; border-color: #c62828; color: #8e0000; }
+
+/* Small helpers: forms side by side in a table cell, grey hint text, tab links */
+form.inline { display: inline; }
+.muted { color: #666; font-size: 14px; }
+.tabs { font-size: 18px; }
+.tabs a, .tabs strong { margin-right: 16px; }
+details { margin: 12px 0; }
+summary { cursor: pointer; font-weight: bold; }
