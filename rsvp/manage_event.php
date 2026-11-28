@@ -359,7 +359,9 @@ require __DIR__ . '/includes/header.php';
     &middot; RSVP deadline <?= e(date('M j, g:i A', strtotime($event['RSVPDeadline']))) ?>
 </p>
 <p>
-    <a class="button" href="event_edit.php?event=<?= e($event_id) ?>">Edit</a>
+    <?php if ($event['EventStatus'] === 'Scheduled'){ ?>
+        <a class="button" href="event_edit.php?event=<?= e($event_id) ?>">Edit</a>
+    <?php } ?>
     <a class="button" href="checkin.php?event=<?= e($event_id) ?>">Check-in</a>
 </p>
 
