@@ -244,8 +244,7 @@ require_once __DIR__ . '/includes/header.php';
                 <strong>Venue:</strong>
                 <?= e($event['VenueName']) ?>,
                 building <?= e($event['Building']) ?>,
-                floor <?= e($event['Floor']) ?>,
-                room <?= e($event['RoomNumber'] ?? 'Not listed') ?>
+                                floor <?= e($event['Floor']) ?><?php if (isset($event['RoomNumber']) && $event['RoomNumber'] !== ''): ?>, room <?= e($event['RoomNumber']) ?><?php endif; ?>
             </p>
 
             <p>

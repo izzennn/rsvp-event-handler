@@ -63,7 +63,14 @@ $event = getVisibleEvent($pdo, $eventId, $userId);
 
 if ($event === null) {
     http_response_code(404);
-    echo "You can't view this event.";
+    $pageTitle = 'Event not available';
+    require_once __DIR__ . '/includes/header.php';
+    ?>
+    <h1>Event not available</h1>
+    <div class="msg-error">You can't view this event.</div>
+    <p><a href="events.php">Back to Browse Events</a></p>
+    <?php
+    require_once __DIR__ . '/includes/footer.php';
     exit;
 }
 
@@ -411,8 +418,7 @@ $progressValue = min($spotsTaken, $capacity);
         <strong>Venue:</strong>
         <?= e($event['VenueName']) ?>,
         building <?= e($event['Building']) ?>,
-        floor <?= e($event['Floor']) ?>,
-        room <?= e($event['RoomNumber'] ?? 'Not listed') ?>
+                floor <?= e($event['Floor']) ?><?php if (isset($event['RoomNumber']) && $event['RoomNumber'] !== ''): ?>, room <?= e($event['RoomNumber']) ?><?php endif; ?>
     </p>
 
     <?php if ((int) $event['RequiresApproval'] === 1): ?>

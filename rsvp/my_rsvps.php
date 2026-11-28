@@ -333,8 +333,7 @@ require __DIR__ . '/includes/header.php';
                     <strong>Venue:</strong>
                     <?= e($rsvp['VenueName']) ?>,
                     <?= e($rsvp['Building']) ?>,
-                    floor <?= e($rsvp['Floor']) ?>,
-                    room <?= e($rsvp['RoomNumber']) ?>
+                                        floor <?= e($rsvp['Floor']) ?><?php if (isset($rsvp['RoomNumber']) && $rsvp['RoomNumber'] !== ''): ?>, room <?= e($rsvp['RoomNumber']) ?><?php endif; ?>
                 </p>
                 <p><strong>Ticket type:</strong> <?= e($rsvp['TypeName']) ?></p>
                 <p><strong>Guests:</strong> <?= e($rsvp['GuestCount']) ?></p>
