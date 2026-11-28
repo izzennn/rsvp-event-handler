@@ -49,6 +49,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             flash('error', 'Enter a phone number.');
         } elseif (mb_strlen($phone) > 20) {
             flash('error', 'A phone number can be at most 20 characters.');
+        } elseif (!preg_match('/^[0-9 +().-]+$/', $phone) || preg_match_all('/[0-9]/', $phone) < 7) {
+            // Only digits, spaces and + ( ) - . and at least 7 digits
+            flash('error', 'Enter a valid phone number, like (212) 555-0143.');
         } else {
             try {
                 $stmt = $pdo->prepare('INSERT INTO USER_PHONE (UserID, PhoneNumber) VALUES (?, ?)');
@@ -295,7 +298,7 @@ require __DIR__ . '/includes/header.php';
             <tr>
                 <td><?= e($org['OrgName']) ?></td>
                 <td><?= e($org['Role']) ?></td>
-                <td><?= e($org['JoinedDate']) ?></td>
+                <td><?= e(date('M j, Y', strtotime($org['JoinedDate']))) ?></td>
                 <td>
                     <?php if ($org['Role'] === 'Officer'): ?>
                         <a class="button" href="org.php?id=<?= e($orgId) ?>">Manage</a>

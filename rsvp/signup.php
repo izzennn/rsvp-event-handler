@@ -67,6 +67,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'External accounts must leave NetID empty.';
     } elseif (mb_strlen($netId) > 15) {
         $errors[] = 'NetID can be at most 15 characters.';
+    } elseif ($netId !== '' && !preg_match('/^[A-Za-z]{2,4}[0-9]{1,6}$/', $netId)) {
+        // A NetID is 2 to 4 letters followed by 1 to 6 digits, like mp4821
+        $errors[] = 'Enter a valid NetID, like mp4821.';
     }
 
     if ($firstName === '') {
@@ -100,6 +103,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     foreach ($phones as $phone) {
         if (mb_strlen($phone) > 20) {
             $errors[] = 'Each phone number can be at most 20 characters.';
+            break;
+        }
+        // Only digits, spaces and + ( ) - . and at least 7 digits
+        if (!preg_match('/^[0-9 +().-]+$/', $phone) || preg_match_all('/[0-9]/', $phone) < 7) {
+            $errors[] = 'Enter a valid phone number, like (212) 555-0143.';
             break;
         }
     }

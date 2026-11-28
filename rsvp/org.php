@@ -307,7 +307,7 @@ require __DIR__ . '/includes/header.php';
                         <?= e($event['Title']) ?><br>
                         <span class="muted"><?= e($event['Visibility']) ?><?= $event['RequiresApproval'] ? ', needs approval' : '' ?></span>
                     </td>
-                    <td><?= e($event['StartTime']) ?></td>
+                    <td><?= e(date('M j, Y g:i A', strtotime($event['StartTime']))) ?></td>
                     <td><?= e($event['VenueName']) ?></td>
                     <td><?= e($event['EventStatus']) ?></td>
                     <td><?= e($event['SpotsTaken']) ?> of <?= e($event['Capacity']) ?></td>
@@ -344,7 +344,7 @@ require __DIR__ . '/includes/header.php';
                 <td><?= e($member['FirstName'] . ' ' . $member['LastName']) ?></td>
                 <td><?= e($member['Email']) ?></td>
                 <td><?= e($member['Role']) ?></td>
-                <td><?= e($member['JoinedDate']) ?></td>
+                <td><?= e(date('M j, Y', strtotime($member['JoinedDate']))) ?></td>
                 <td>
                     <form method="post" action="<?= e($selfUrl . '&tab=members') ?>" class="inline">
                         <input type="hidden" name="action" value="set_role">
